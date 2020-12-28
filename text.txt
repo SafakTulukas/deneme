@@ -1,0 +1,32 @@
+dotnet new sln    => yeni solution yaptık
+
+dotnet new webapi -o API    =>   yeni web api yaptık
+
+dotnet sln add API     =>  API yi solution içerisine ekledik.
+
+dotnet sln list  =>  Solution içerisindeki dosyaları görmek için
+
+dotnet dev-certs https  =>  güvenilir sertifikayı kullanır.
+
+dotnet tool install --global dotnet-ef 
+dotnet tool update --global dotnet-ef
+
+dotnet ef migrations add InitialCreate -o Data/Migrations  => İlk migrations yap
+dotnet ef migrations remove
+
+
+
+dotnet new classlib -o Infrastructure  => Ana dizinde yeni bir katman oluşturmak için kullan 
+dotnet sln add Infrastructure  => Oluşturduğumuz katmanı çözüme ekledik.
+api>dotnet add reference ../Infrastructure  => Api katmanına girip referans olarak ekledik.
+
+infrastructure>dotnet add reference ../Core    =>  Infrastructure katmanına girip referans olarak ekledik.
+
+dotnet restore  => yeniden yükledik
+
+
+//// git /////
+git status   => git durumunu kontrol et
+git init     => git oluştur.
+new file >  .gitignore isimli dosyayı oluştur.
+github web sitesine giderek repository oluştur.
