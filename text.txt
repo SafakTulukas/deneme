@@ -30,3 +30,18 @@ git status   => git durumunu kontrol et
 git init     => git oluştur.
 new file >  .gitignore isimli dosyayı oluştur.
 github web sitesine giderek repository oluştur.
+git remote add origin https://github.com/SafakTulukas/deneme.git  => git içerisindeki adresi ayarla
+isim verip commit oluştur. pull to ile gönder
+/////////////////
+
+
+
+/// Katmanlı mimaride infrastructure projesinda data/migrations klasörüne yazıyoruz. Starter projesi API
+dotnet ef migrations add InitialCreate -p infrastructure -s API -o Data/Migrations
+
+///
+dotnet ef migrations remove -p infrastructure -s API
+
+
+/// Excel dosyasını csv ye çevir. Sonra csv ye sağ tıkla not defterinde aç
+ardından https://csvjson.com sitesinde onları json dosyaya çevir.
