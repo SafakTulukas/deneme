@@ -45,3 +45,24 @@ dotnet ef migrations remove -p infrastructure -s API
 
 /// Excel dosyasını csv ye çevir. Sonra csv ye sağ tıkla not defterinde aç
 ardından https://csvjson.com sitesinde onları json dosyaya çevir.
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Hata kontrolünü ele almak //
+
+API/Errors altında
+ ApiResponse class oluştur.
+ ApiException class oluştur.
+ErrorController oluştur.
+Middleware/ ExceptionMiddleware oluştur.
+startup altında => app.UseMiddleware<ExceptionMiddleware>();
+                   app.UseStatusCodePagesWithReExecute("/errors/{0}");
+Errors/ApiValidationErrorResponse class oluştur
+startup içinde validation hataları için gereken kodu yaz.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+// Swagger çalışması için 
+ErrorController içine    [ApiExplorerSettings(IgnoreApi = true)]  attribute ekledik. Bunu swagger da görünmesin diye yaptık.

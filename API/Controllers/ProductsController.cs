@@ -2,19 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Errors;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
-{
-    [ApiController]
-    [Route("api/products")]
-    public class ProductsController : ControllerBase
+{    
+    public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepo;
         private readonly IGenericRepository<ProductBrand> _brandRepo;
@@ -36,16 +36,20 @@ namespace API.Controllers
             var spec = new ProductsWithTypesAndBrandsSpecification();
 
             var products = await _productRepo.ListAsync(spec);
-
+            
             return Ok(_mapper.Map<IReadOnlyList<ProductToReturnDto>>(products));
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)] // Swagger da 200 durum bilgisini göster
+        [ProducesResponseType(typeof(ApiResponse),StatusCodes.Status404NotFound)] // Swagger da 404 durum bilgisini göster
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
 
             var product = await _productRepo.GetEntityWithSpec(spec);
+
+            if(product ==null) return NotFound(new ApiResponse(404));
 
             return Ok(_mapper.Map<ProductToReturnDto>(product));
         }
