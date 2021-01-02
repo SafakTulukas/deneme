@@ -66,3 +66,26 @@ startup içinde validation hataları için gereken kodu yaz.
 
 // Swagger çalışması için 
 ErrorController içine    [ApiExplorerSettings(IgnoreApi = true)]  attribute ekledik. Bunu swagger da görünmesin diye yaptık.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+SSL Sertifika kullanımı
+ssl klasörünü oluşturup içerisine sertifikayı kopyaladık
+bilgisayara server.crt yi kurduk
+Angular.json içerisine aşağıdaki 3 satırı ekledik.
+    "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",          
+          "options": {
+            "browserTarget": "client:build",
+        =>    "sslKey": "ssl/server.key",
+        =>    "sslCert": "ssl/server.crt",
+        =>    "ssl": true
+          },
+
+///////////////////////////////////////////////////////////////////////////////////////
+Bootstrap  => ngx-Bootstrap
+    https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+    => ng add ngx-bootstrap 
+
+Font-Awesome  =>  npm install font-awesome
+                  "./node_modules/font-awesome/css/font-awesome.min.css",
