@@ -89,3 +89,8 @@ Bootstrap  => ngx-Bootstrap
 
 Font-Awesome  =>  npm install font-awesome
                   "./node_modules/font-awesome/css/font-awesome.min.css",
+
+//////////////////////////////////////////////////////////////////////////////////////
+Model kopyalama
+  Swagger içinden modelin kopyasını al
+  http://www.jsontots.com adresinden json haline çevir.
