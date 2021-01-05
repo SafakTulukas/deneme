@@ -94,3 +94,14 @@ Font-Awesome  =>  npm install font-awesome
 Model kopyalama
   Swagger içinden modelin kopyasını al
   http://www.jsontots.com adresinden json haline çevir.
+
+////////////////////////////////////////////////////////////////////////////////////
+Interceptor eklediğin zaman app.module /  provider bölümüne de eklemeyi unutma
+
+///////////////////////////////////////////////////////////////////////////////////
+npm install ngx-toastr
+modül içerisine ekledik => ToastrModule.forRoot({
+                              positionClass: 'toast-bottom-right',
+                              preventDuplicates:true
+                            })
+angular.json içerisine =>
