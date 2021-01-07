@@ -104,4 +104,44 @@ modül içerisine ekledik => ToastrModule.forRoot({
                               positionClass: 'toast-bottom-right',
                               preventDuplicates:true
                             })
-angular.json içerisine =>
+angular.json içerisine => "./node_modules/ngx-toastr/toastr.css"
+
+////////////////////////////////////////////////////////////////////////////////////
+xng-breadcrumb
+npm install --save xng-breadcrumb
+CoreModule içerisine =>  BreadcrumbModule  eklemeyi unutma
+app-routing  içerisine   data :{breadcrumb: 'Test Errors'}  yönlendirmeleri eklemeyi unutma
+
+ => section-header.html  içerisine  <xng-breadcrumb></xng-breadcrumb> eklersen görünür
+
+ => Product Detail alabilmek için 
+    shop-routing içerisine data: { breadcrumb: { alias: 'productDetails' } 
+    product-details.ts içerisine service ekle  private bcService:BreadcrumbService  ekle
+    ürün yüklenirken alias adını ayarla this.bcService.set('@productDetails', product.name);
+  
+ => style.css eklemelerini yap
+
+ ////////////////////////////////////////////////////////////////////////////////////
+ npm install bootswatch
+  => angular.json içerisine  "./node_modules/bootswatch/dist/sketchy/bootstrap.min.css",  ekle
+
+/////////////////////////////////////////////////////////////////////////////////////
+LOADING 
+npm install ngx-spinner
+  =>  app.module  içerisine  NgxSpinnerModule ekle
+  =>  app.componenet.html içerisine 
+      <ngx-spinner>
+        <h3>Loading...</h3>
+      </ngx-spinner>
+  => core/services altında busy servisini oluştur
+      ng g s busy --flat --skip-tests  oluştur
+  => core/interceptors altında  
+      loading.interceptor.ts dosyasını oluştur.
+  => app.module içerisine 
+       { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true } ekle
+
+/////////////////////////////////////////////////////////////////////////////////////
+Home page / Carousel 
+  => CarouselModule ekledik.   ngx-bootstrap içerisinden ekledik
+  => Home/home.module içerisine shared.module ekledik.
+
