@@ -145,3 +145,19 @@ Home page / Carousel
   => CarouselModule ekledik.   ngx-bootstrap içerisinden ekledik
   => Home/home.module içerisine shared.module ekledik.
 
+/////////////////////////////////////////////////////////////////////////////////////
+REDIS Kullanmak
+
+nuget paket yöneticisi içinden => StackExchange.Redis  => Infrastructure içerisine kurduk.
+API / startup => servisi eklemeyi unutma
+
+using StackExchange.Redis;
+
+  services.AddSingleton<ConnectionMultiplexer>(c =>{
+                var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"),true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
+
+
+
