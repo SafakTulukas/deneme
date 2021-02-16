@@ -158,6 +158,8 @@ using StackExchange.Redis;
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
-
+////////////////////////////////////////////////////////////////////////////////////
+uuid kurmak,  guid için kullanacağız
+   => npm install uuid
 
 
