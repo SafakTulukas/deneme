@@ -159,7 +159,37 @@ using StackExchange.Redis;
             });
 
 ////////////////////////////////////////////////////////////////////////////////////
-uuid kurmak,  guid için kullanacağız
+uuid kurmak,  guid için kullanacağız. Redis server da guid id ile basket içerisine
+eklenenleri kayıt yapacağız.
+
    => npm install uuid
 
+///////////////////////////////////////////////////////////////////////////////////
+Identity Kullanmak / Infrasucture projesi içerisine kurduk
 
+  =>Nuget => Microsoft.AspNetCore.Identity
+             Microsoft.AspNetCore.Identity.EntityFrameworkCore
+             Microsoft.IdentityModel.Tokens 
+             System.IdentityModel.Tokens.Jwt 
+
+            / API projesine kurduk
+             Microsoft.AspNetCore.Authentication.JwtBearer
+
+            / Core projesine kurduk
+             Microsoft.Extensions.Identity.Stores
+
+  => Core/Entities/Identity altında nesneleri oluşturduk
+  => Infrastructure/Identity altında AppIdentityDbContext oluşturduk
+  => Startup ve appsettings içinde dbcontext bağlantısını tanımladık
+  => dotnet ef migrations add IdentityInitial -p Infrastructure -s API -o Identity/Migrations -c AppIdentityDbContext
+  =>  Silmek istersen dotnet ef migrations remove -p Infrastructure -s API -c AppIdentityDbContext  
+
+  => Seed database Program.cs içerisine ekle
+
+  => AccountController içerisinde login register yazdık
+
+  // Core/Interfaces  => ITokenService oluşturuldu
+  // Infrastructure/Services  => TokenService oluşturuldu
+  // API/Extensions/IdentityServiceExtensions içerisinde Authentication yöntemini ayarla
+
+  // AccountController / UserManager için extension yazdık. Çünkü Adres bilgisini almak için include komutunu kullanamıyoruz.

@@ -13,6 +13,12 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText()
+        {
+            return "secret stuff";
+        }
 
         [HttpGet("notfound")]
         public ActionResult GetNotFoundRequest()
@@ -54,7 +60,7 @@ namespace API.Controllers
         [HttpGet("auth")]
         public ActionResult<string> GetSecret()
         {
-             return BadRequest(new ApiResponse(401));
+            return BadRequest(new ApiResponse(401));
         }
     }
 }
