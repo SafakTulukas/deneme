@@ -20,7 +20,7 @@ namespace API.Controllers
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, 
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
                     ITokenService tokenService, IMapper mapper)
         {
             _signInManager = signInManager;
@@ -56,7 +56,7 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
 
-            return _mapper.Map<Address,AddressDto>(user.Address);
+            return _mapper.Map<Address, AddressDto>(user.Address);
         }
 
         [HttpPut("address")]
@@ -65,13 +65,13 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
 
-            user.Address = _mapper.Map<AddressDto,Address>(address);
+            user.Address = _mapper.Map<AddressDto, Address>(address);
 
             var result = await _userManager.UpdateAsync(user);
 
-            if(result.Succeeded) return Ok(_mapper.Map<Address,AddressDto>(user.Address));
+            if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
 
-            return BadRequest ("Problem updating the user");
+            return BadRequest("Problem updating the user");
         }
 
 
@@ -98,6 +98,11 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
+            {
+                return new BadRequestObjectResult(new ApiValidationErrorResponse { Errors = new[] { "Email address is in use" } });
+            }
+
             var user = new AppUser
             {
                 DisplayName = registerDto.DisplayName,
