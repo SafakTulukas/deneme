@@ -203,3 +203,55 @@ Identity Kullanmak / Infrasucture projesi içerisine kurduk
     => Swagger / AccountController için SwaggerService ekleme yaptık  
         securitySchema ekledik
         Bu sayede swagger da authorize olmadan account bilgisini göremeyiz
+  
+  ////////////////////////////////////////////////////////////////////////////////////
+  Identity client tarafında yapılması
+    => ng g m account
+    => ng g m account-routing --flat
+    => ng g s accıunt --flat --skip-tests
+    => ng g c login --skip-tests
+    => ng g c register --skip-tests 
+
+    - Önce routing module den başla
+    - account module içerisine routing eklemeyi unutma
+    - app-routing içerisine eklemeyi yap
+
+    - Ardından modelleri ekle
+    - model/ user.ts,  address.ts
+
+    - account.service içinde gerekenleri yaz
+
+    - Reactive Form kullanacağız  
+        - login form ekledik
+        - shared module içerisine reactiveformmodule ekledik
+        - account module içeriine shared module ekledik
+        - Login Form içerisine eklemelerini yaptık.
+    - Navbar componenet ts içerisine behaviour subject ten gelen datayı aldık.
+
+    - loadCurrentUser ile token kullanarak var olan kullanıcının bilgilerini aldım. 
+      app.component.ts içerisine bunları yazacağım. Böylece siteye tekrar geldiğimde site kullanıcıyı tanıyacak
+
+    - https://valor-software.com/ngx-bootstrap/#/dropdowns  dropdown menüyü aldık
+      sharedModule içerisine BsDropdownModule.forRoot()  ekledik
+      navbar.html içinde dropdown ekledik.
+
+    - client validation
+      https://regexlib.com/ içinden email için pattern aldık   ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
+
+    - Reusable Text Input için shared içinde bir component yaptık
+      ng g c text-input --skip-tests
+      text-input.components  ControlValueAccessor implement edeceğiz
+      ardından form alanlarında artık app-text-input kullanıyoruz.
+
+    - Register Form
+      Email var mı yok mu ? kontrolünü yapmak
+      validateEmailNotTaken()
+    
+    - Email doğrulamayı async yapmak 
+      text-input.component içerisine ekleme yaptık
+    
+    - AuthGuard
+      app/core altında guards klasörü oluştur.
+      app-routing içerisine AuthGuard olması gereken sayfalara ekledik
+      login.component.ts içerisine returnUrl yakaladık
+      *** account.service kullanıcıyı  ReplaySubject  olarak değiştirdik.
